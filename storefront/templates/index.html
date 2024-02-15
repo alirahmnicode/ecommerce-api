@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 20px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .likns {
+            width: 400px;
+        }
+
+        .link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: royalblue;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            height: 40px;
+        }
+
+        .link>a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .user {
+            margin-bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="user">
+            <p>test user:</p>
+            <ul>
+                <li>usernaem: admin</li>
+                <li>password: admin</li>
+            </ul>
+        </div>
+        <div class="likns">
+            <div class="link"><a href="admin/">Admin Panel</a></div>
+            <div class="link"><a href="api/schema/swagger-ui/">swagger-ui</a></div>
+            <div class="link"><a href="api/schema/redoc/">redoc</a></div>
+            <div class="link"><a href="api/schema/json/">Download json documention</a></div>
+            <div class="link"><a href="api/schema/yaml/">Download yaml documention</a></div>
+        </div>
+    </div>
+</body>
+
+</html>
