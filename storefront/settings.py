@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_filters",
     "rest_framework",
+    "corsheaders",
     "debug_toolbar",
     "store",
     "tags",
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -139,7 +141,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 
@@ -158,8 +160,10 @@ SIMPLE_JWT = {"AUTH_HEADER_TYPES": ("JWT",), "ACCESS_TOKEN_LIFETIME": timedelta(
 
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'E-commerce',
-    'DESCRIPTION': 'E-commerce API',
-    'VERSION': '1.0.0',
+    "TITLE": "E-commerce",
+    "DESCRIPTION": "E-commerce API",
+    "VERSION": "1.0.0",
     "SCHEMA_PATH_PREFIX": r"/store/",
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
