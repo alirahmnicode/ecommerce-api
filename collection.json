@@ -1,0 +1,82 @@
+[
+    {
+        "model": "store.collection",
+        "pk": 1,
+        "fields": {
+            "title": "collection1",
+            "featured_product": null
+        }
+    },
+    {
+        "model": "store.collection",
+        "pk": 2,
+        "fields": {
+            "title": "Grocery",
+            "featured_product": null
+        }
+    },
+    {
+        "model": "store.collection",
+        "pk": 3,
+        "fields": {
+            "title": "Beauty",
+            "featured_product": null
+        }
+    },
+    {
+        "model": "store.collection",
+        "pk": 4,
+        "fields": {
+            "title": "Cleaning",
+            "featured_product": null
+        }
+    },
+    {
+        "model": "store.collection",
+        "pk": 5,
+        "fields": {
+            "title": "Stationary",
+            "featured_product": null
+        }
+    },
+    {
+        "model": "store.collection",
+        "pk": 6,
+        "fields": {
+            "title": "Pets",
+            "featured_product": null
+        }
+    },
+    {
+        "model": "store.collection",
+        "pk": 7,
+        "fields": {
+            "title": "Baking",
+            "featured_product": null
+        }
+    },
+    {
+        "model": "store.collection",
+        "pk": 8,
+        "fields": {
+            "title": "Spices",
+            "featured_product": null
+        }
+    },
+    {
+        "model": "store.collection",
+        "pk": 9,
+        "fields": {
+            "title": "Toys",
+            "featured_product": null
+        }
+    },
+    {
+        "model": "store.collection",
+        "pk": 10,
+        "fields": {
+            "title": "Magazines",
+            "featured_product": null
+        }
+    }
+]
