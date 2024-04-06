@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     "tags",
     "likes",
     "core",
-    "testapp",
     "drf_spectacular",
 ]
 

@@ -28,7 +28,6 @@ doc_patterns = [
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", index),
-    path("cache/", include("testapp.urls")),
     path("store/", include("store.urls")),
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
