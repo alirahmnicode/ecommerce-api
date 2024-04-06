@@ -9,7 +9,7 @@ db.sqlite3
 # Backup files # 
 *.bak 
 
-src/media
+media
 
 # Python # 
 *.py[cod] 
