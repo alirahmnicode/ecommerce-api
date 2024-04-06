@@ -12,6 +12,7 @@ from store.models import (
     Product,
     Collection,
     Review,
+    ProductImages,
 )
 
 
@@ -42,6 +43,17 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def calculate_tax(self, product: Product):
         return product.unit_price * Decimal(1.1)
+
+
+class ProductImageSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProductImages
+        fields = ("id", "image", "flag")
+
+    def create(self, validated_data):
+        product_id = self.context["product_id"]
+        return ProductImages.objects.create(product_id=product_id, **validated_data)
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -167,9 +179,7 @@ class CreateOrderSerializer(serializers.Serializer):
     def save(self, **kwargs):
         with transaction.atomic():
             cart_id = self.validated_data["cart_id"]
-            customer, created = Customer.objects.get_or_create(
-                user_id=self.context["user_id"]
-            )
+            customer = Customer.objects.get(user_id=self.context["user_id"])
             order = Order.objects.create(customer=customer)
             cart_items = CartItem.objects.select_related("product").filter(
                 cart_id=cart_id

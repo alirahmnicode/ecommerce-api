@@ -31,10 +31,10 @@ class Product(models.Model):
         max_digits=6, decimal_places=2, validators=[MinValueValidator(1)]
     )
     inventory = models.IntegerField(validators=[MinValueValidator(0)])
-    last_update = models.DateTimeField(auto_now=True)
     collection = models.ForeignKey(
         Collection, on_delete=models.PROTECT, related_name="products"
     )
+    last_update = models.DateTimeField(auto_now=True)
     promotions = models.ManyToManyField(Promotion, blank=True)
 
     def __str__(self) -> str:
@@ -42,6 +42,15 @@ class Product(models.Model):
 
     class Meta:
         ordering = ["title"]
+
+
+class ProductImages(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="images/")
+    flag = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.product.title
 
 
 class Customer(models.Model):
@@ -63,13 +72,13 @@ class Customer(models.Model):
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
-    
+
     def first_name(self):
-        return self.user.first_name 
+        return self.user.first_name
 
     def last_name(self):
-        return self.user.last_name 
-    
+        return self.user.last_name
+
     class Meta:
         ordering = ["user__first_name", "user__last_name"]
 
