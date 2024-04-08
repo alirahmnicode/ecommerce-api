@@ -1,6 +1,6 @@
 from django_filters.rest_framework import FilterSet
 
-from store.models import Product
+from apps.products.models import Product
 
 
 class ProductFilter(FilterSet):

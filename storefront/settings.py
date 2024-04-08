@@ -27,15 +27,17 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # third party libraries
     "django_filters",
     "rest_framework",
     "corsheaders",
     "debug_toolbar",
-    "store",
-    "tags",
-    "likes",
-    "core",
     "drf_spectacular",
+    # local apps
+    "apps.carts",
+    "apps.orders",
+    "apps.products",
+    "apps.users",
 ]
 
 MIDDLEWARE = [
@@ -80,25 +82,25 @@ WSGI_APPLICATION = "storefront.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "webstorepr$default",
-        "HOST": "webstorepr.mysql.pythonanywhere-services.com",
-        "USER": "webstorepr",
-        "PASSWORD": "adminali0921",
-    }
-}
-
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.mysql",
-#         "NAME": "storefront",
-#         "HOST": "localhost",
-#         "USER": "root",
+#         "NAME": "webstorepr$default",
+#         "HOST": "webstorepr.mysql.pythonanywhere-services.com",
+#         "USER": "webstorepr",
 #         "PASSWORD": "adminali0921",
 #     }
 # }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "storefront",
+        "HOST": "localhost",
+        "USER": "root",
+        "PASSWORD": "adminali0921",
+    }
+}
 
 
 # Password validation
@@ -159,13 +161,13 @@ REST_FRAMEWORK = {
 }
 
 
-AUTH_USER_MODEL = "core.User"
+AUTH_USER_MODEL = "users.User"
 
 
 DJOSER = {
     "SERIALIZERS": {
-        "user_create": "core.serializers.UserCreateSerializer",
-        "current_user": "core.serializers.UserSerializer",
+        "user_create": "apps.users.serializers.UserCreateSerializer",
+        "current_user": "apps.users.serializers.UserCustomSerializer",
     }
 }
 

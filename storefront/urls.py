@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls.static import static 
+from django.conf.urls.static import static
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
@@ -18,17 +18,30 @@ admin.site.index_title = "Admin"
 
 
 doc_patterns = [
-    path('api/schema/yaml/', SpectacularAPIView.as_view(), name='schema'),
-    path('api/schema/json/', SpectacularJSONAPIView.as_view(), name='json-schema'),
-    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='json-schema'), name='swagger-ui'),
-    path('api/schema/redoc/', SpectacularRedocView.as_view(url_name='json-schema'), name='redoc'),
+    path("api/schema/yaml/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/schema/json/", SpectacularJSONAPIView.as_view(), name="json-schema"),
+    path(
+        "api/schema/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="json-schema"),
+        name="swagger-ui",
+    ),
+    path(
+        "api/schema/redoc/",
+        SpectacularRedocView.as_view(url_name="json-schema"),
+        name="redoc",
+    ),
 ]
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    # local apps urls
     path("", index),
-    path("store/", include("store.urls")),
+    path("products/", include("apps.products.urls")),
+    path("carts/", include("apps.carts.urls")),
+    path("orders/", include("apps.orders.urls")),
+    path("customers/", include("apps.users.urls")),
+    # third party urls
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
     path("__debug__/", include(debug_toolbar.urls)),
