@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.db.models import Count
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -19,7 +21,6 @@ from apps.products.serializers import (
 from apps.orders.models import OrderItem
 
 
-# Create your views here.
 class ProductViewSet(ModelViewSet):
     # create, retrieve, update, delete product
     queryset = Product.objects.all()
@@ -33,6 +34,10 @@ class ProductViewSet(ModelViewSet):
 
     def get_serializer_context(self):
         return {"request": self.request}
+    
+    @method_decorator(cache_page(5 * 60))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
 
     def destroy(self, request, *args, **kwargs):
         if OrderItem.objects.filter(product_id=kwargs["pk"]).count() > 0:

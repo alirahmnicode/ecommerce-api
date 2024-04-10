@@ -32,7 +32,6 @@ doc_patterns = [
     ),
 ]
 
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     # local apps urls
@@ -44,7 +43,6 @@ urlpatterns = [
     # third party urls
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
-    path("__debug__/", include(debug_toolbar.urls)),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
 ]
 
@@ -52,3 +50,6 @@ urlpatterns = [
 urlpatterns += doc_patterns
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+if settings.DEBUG:
+    urlpatterns.append(path("__debug__/", include(debug_toolbar.urls)))
