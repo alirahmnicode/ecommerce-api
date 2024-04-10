@@ -1,19 +1,9 @@
 import os
-from pathlib import Path
 from datetime import timedelta
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-hs6j037urx6iav+7#10%-vu4l4f5@@-1_zo)oft4g7$vf2$jmp"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+SECRET_KEY = NotImplemented
 
 ALLOWED_HOSTS = ["*"]
 
@@ -58,12 +48,12 @@ INTERNAL_IPS = [
     # ...
 ]
 
-ROOT_URLCONF = "storefront.urls"
+ROOT_URLCONF = "project.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "storefront/templates")],
+        "DIRS": [os.path.join(BASE_DIR, "project/templates")],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -76,7 +66,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "storefront.wsgi.application"
+WSGI_APPLICATION = "project.wsgi.application"
 
 
 # Database
@@ -142,8 +132,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-MEDIA_ROOT = BASE_DIR / 'media'
-MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

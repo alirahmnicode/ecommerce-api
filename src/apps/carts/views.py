@@ -1,5 +1,6 @@
 from rest_framework import mixins
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from drf_spectacular.utils import extend_schema, OpenApiParameter
 
 from apps.carts.models import Cart, CartItem
 from apps.carts.serializers import (

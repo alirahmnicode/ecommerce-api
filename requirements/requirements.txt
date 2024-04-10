@@ -7,7 +7,6 @@ cryptography==42.0.2
 defusedxml==0.8.0rc2
 Django==5.0.2
 django-cors-headers==4.3.1
-django-debug-toolbar==4.3.0
 django-filter==23.5
 django-templated-mail==1.1.1
 djangorestframework==3.14.0

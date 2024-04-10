@@ -5,12 +5,11 @@ from apps.products.models import Product
 from apps.products.serializers import SimpleProductSerializer
 
 
-
 class CartItemSerializer(serializers.ModelSerializer):
     product = SimpleProductSerializer()
     total_price = serializers.SerializerMethodField()
 
-    def get_total_price(self, cart_item: CartItem):
+    def get_total_price(self, cart_item: CartItem) -> float:
         return cart_item.product.unit_price * cart_item.quantity
 
     class Meta:
@@ -23,8 +22,10 @@ class CartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(many=True, read_only=True)
     total_price = serializers.SerializerMethodField()
 
-    def get_total_price(self, cart: Cart):
-        [item.product.unit_price * item.quantity for item in cart.items.all()]
+    def get_total_price(self, cart: Cart) -> float:
+        return sum(
+            [item.product.unit_price * item.quantity for item in cart.items.all()]
+        )
 
     class Meta:
         model = Cart

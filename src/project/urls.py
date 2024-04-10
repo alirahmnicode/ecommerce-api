@@ -37,10 +37,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # local apps urls
     path("", index),
-    path("products/", include("apps.products.urls")),
-    path("carts/", include("apps.carts.urls")),
-    path("orders/", include("apps.orders.urls")),
-    path("customers/", include("apps.users.urls")),
+    path("store/products/", include("apps.products.urls")),
+    path("store/carts/", include("apps.carts.urls")),
+    path("store/orders/", include("apps.orders.urls")),
+    path("store/customers/", include("apps.users.urls")),
     # third party urls
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
