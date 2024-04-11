@@ -51,7 +51,6 @@ coverage.xml
 *.cover 
 .hypothesis/ 
 
-
 # pyenv 
 .python-version 
 
@@ -96,3 +95,6 @@ GitHub.sublime-settings
 !.vscode/launch.json 
 !.vscode/extensions.json 
 .history
+
+# cache
+*.rdb
