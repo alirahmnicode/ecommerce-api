@@ -35,7 +35,7 @@ class ProductViewSet(ModelViewSet):
     def get_serializer_context(self):
         return {"request": self.request}
     
-    @method_decorator(cache_page(5 * 60))
+    # @method_decorator(cache_page(5 * 60))
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
