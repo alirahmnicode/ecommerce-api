@@ -59,7 +59,7 @@ WSGI_APPLICATION = "project.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": "webstorepr$default",
+        "NAME": "webstorepr$store",
         "HOST": "webstorepr.mysql.pythonanywhere-services.com",
         "USER": "webstorepr",
         "PASSWORD": "adminali0921",
