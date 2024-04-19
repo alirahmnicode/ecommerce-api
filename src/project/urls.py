@@ -36,7 +36,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # local apps urls
     path("", index),
-    path("store/products/", include("apps.products.urls")),
+    path("store/", include("apps.products.urls")),
     path("store/carts/", include("apps.carts.urls")),
     path("store/orders/", include("apps.orders.urls")),
     path("store/customers/", include("apps.users.urls")),
