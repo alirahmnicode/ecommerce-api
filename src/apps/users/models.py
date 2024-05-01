@@ -18,7 +18,6 @@ class Customer(models.Model):
         (MEMBERSHIP_GOLD, "Gold"),
     ]
     phone = models.CharField(max_length=255)
-    birth_date = models.DateField(null=True, blank=True)
     membership = models.CharField(
         max_length=1, choices=MEMBERSHIP_CHOICES, default=MEMBERSHIP_BRONZE
     )
@@ -33,11 +32,16 @@ class Customer(models.Model):
     def last_name(self):
         return self.user.last_name
 
+    def __str__(self):
+        return self.user.username
+    
     class Meta:
         ordering = ["user__first_name", "user__last_name"]
 
 
 class Address(models.Model):
-    street = models.CharField(max_length=255)
+    province = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    street = models.CharField(max_length=255)
+    number = models.CharField(max_length=255)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="addresses")

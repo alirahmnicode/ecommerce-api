@@ -1,9 +1,12 @@
-from rest_framework.routers import DefaultRouter
+from rest_framework_nested import routers
 
 from . import views
 
 
-router = DefaultRouter()
+router = routers.DefaultRouter()
 router.register("", views.CustomerViewSet)
 
-urlpatterns = router.urls
+customer_router = routers.NestedDefaultRouter(router, "", lookup="customer")
+customer_router.register("address", views.CustomerAddressViewSet, basename="customer-address")
+
+urlpatterns = router.urls + customer_router.urls
