@@ -27,7 +27,6 @@ class Product(models.Model):
     unit_price = models.DecimalField(
         max_digits=6, decimal_places=2, validators=[MinValueValidator(1)]
     )
-    inventory = models.IntegerField(validators=[MinValueValidator(0)])
     collection = models.ForeignKey(
         Collection, on_delete=models.PROTECT, related_name="products"
     )
@@ -48,6 +47,9 @@ class ProductImages(models.Model):
     image = models.ImageField(upload_to="images/")
     flag = models.BooleanField(default=False)
 
+    def get_image_url(self):
+        return self.image.url
+    
     def __str__(self):
         return self.product.title
 

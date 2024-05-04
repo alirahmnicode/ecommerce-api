@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+from django.utils.text import slugify
 from rest_framework import serializers
 
 from apps.products.models import Collection, Product, ProductImages, Review
@@ -25,8 +26,22 @@ class ProductImageSerializer(serializers.ModelSerializer):
         return ProductImages.objects.create(product_id=product_id, **validated_data)
 
 
+class ProductImageCreateSerializer(serializers.Serializer):
+    images = serializers.ListField(child=serializers.ImageField(), required=True)
+
+
 class ProductSerializer(serializers.ModelSerializer):
     images = ProductImageSerializer(many=True, read_only=True)
+    slug = serializers.SlugField(read_only=True)
+    price_with_tax = serializers.SerializerMethodField(method_name="calculate_tax")
+
+    def calculate_tax(self, product: Product):
+        return product.unit_price * Decimal(1.1)
+
+    def create(self, validated_data):
+        title = validated_data.get("title")
+        slug = slugify(title, allow_unicode=True)
+        return Product.objects.create(slug=slug, **validated_data)
 
     class Meta:
         model = Product
@@ -35,16 +50,10 @@ class ProductSerializer(serializers.ModelSerializer):
             "title",
             "slug",
             "images",
-            "inventory",
             "unit_price",
             "price_with_tax",
             "collection",
         )
-
-    price_with_tax = serializers.SerializerMethodField(method_name="calculate_tax")
-
-    def calculate_tax(self, product: Product):
-        return product.unit_price * Decimal(1.1)
 
 
 class ReviewSerializer(serializers.ModelSerializer):

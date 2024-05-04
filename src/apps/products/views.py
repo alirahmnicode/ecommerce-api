@@ -4,6 +4,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.filters import SearchFilter, OrderingFilter
+from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 
 from apps.products.models import Product, ProductImages, Collection, Review
@@ -12,6 +13,7 @@ from apps.products.permissions import IsAdminOrReadOnly
 from apps.products.serializers import (
     ProductSerializer,
     ProductImageSerializer,
+    ProductImageCreateSerializer,
     CollectionSerializer,
     ReviewSerializer,
 )
@@ -50,6 +52,24 @@ class ProductImagesViewSet(ModelViewSet):
 
     def get_queryset(self):
         return ProductImages.objects.filter(product_id=self.kwargs["product_pk"])
+
+    def get_serializer_class(self):
+        if self.request.method == "POST":
+            return ProductImageCreateSerializer
+
+    def create(self, request, *args, **kwargs):
+        images = request.data.pop("images")  
+
+        if len(images) < 1:
+            return Response("The images list is empty!")
+        else:
+            images_list = []
+
+            for img in images:
+                image = ProductImages.objects.create(product_id=kwargs["product_pk"], image=img)
+                images_list.append(dict(id=image.id, url=image.get_image_url()))
+
+            return Response(images_list, status=status.HTTP_201_CREATED)
 
     def get_serializer_context(self):
         return {"product_id": self.kwargs["product_pk"]}
